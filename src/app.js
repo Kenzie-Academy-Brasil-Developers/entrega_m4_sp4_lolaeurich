@@ -1,10 +1,21 @@
-import express from "express";
-import "dotenv/config";
+import express from "express"
 
-const app = express();
+//sempre deve vir antes do database para executar na ordem certa.
+import "dotenv/config"
+import { startDatabase } from "../src/database/index.js"
 
-app.use(express.json());
+import categorieRouter from "../src/Routes/categories.routes.js"
+import productsRouter from "./Routes/products.routes.js"
 
-export default app.listen(3333, () => {
+const app = express()
+
+app.use(express.json())
+
+app.use('/categories', categorieRouter)
+app.use('/products',productsRouter)
+
+
+export default app.listen(3001, () => {
   console.log("Server running");
+  startDatabase();
 });

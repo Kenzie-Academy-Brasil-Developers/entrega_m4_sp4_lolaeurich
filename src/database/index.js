@@ -1,12 +1,13 @@
-import { Client } from "pg";
+import pkg from "pg";
+const {Client} = pkg
 
 const database = new Client(
   process.env.NODE_ENV === "test"
     ? {
-        user: "",
-        host: "",
-        database: "",
-        password: "",
+        user: "igor", //o user é igor pq o pc não é meu e achei melhor manter no nome do dono. kkkk
+        host: "localhost",
+        database: "tests_products",
+        password: "1234",
         port: 5432,
       }
     : {
@@ -20,6 +21,7 @@ const database = new Client(
 
 export const startDatabase = async () => {
   await database.connect();
+  console.log('database conectada')
 };
 
 export default database;
